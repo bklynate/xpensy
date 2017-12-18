@@ -11,7 +11,7 @@ describe('ExpenseForm Component', () => {
   });
 
   it('should render ExpenseForm with expense data', () => {
-    const wrapper = shallow(<ExpenseForm expenseToEdit={expenses[1]} />);
+    const wrapper = shallow(<ExpenseForm expense={expenses[1]} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -77,5 +77,36 @@ describe('ExpenseForm Component', () => {
         target: { value }
       });
     expect(wrapper.state('amount')).not.toBe(value);
+  });
+
+  it('should call onSubmit prop for valid form submission', () => {
+    const { amount, createdAt, description, note } = expenses[2];
+    const onSubmitSpy = jest.fn();
+    const wrapper = shallow(
+      <ExpenseForm expense={expenses[2]} onSubmit={onSubmitSpy} />
+    );
+    wrapper.find('form').simulate('submit', {
+      preventDefault: () => {}
+    });
+    expect(wrapper.state('error')).toBe('');
+    expect(onSubmitSpy).toHaveBeenLastCalledWith({
+      amount,
+      createdAt,
+      description,
+      note
+    });
+  });
+
+  it('should set a new date when onDateChange is called', () => {
+    const wrapper = shallow(<ExpenseForm />);
+    wrapper.find('SingleDatePicker').prop('onDateChange')(moment());
+    expect(wrapper.state('createdAt')).toEqual(moment());
+  });
+
+  it('should set calendarFocus on change', () => {
+    const focused = false;
+    const wrapper = shallow(<ExpenseForm />);
+    wrapper.find('SingleDatePicker').prop('onFocusChange')({ focused });
+    expect(wrapper.state('calendarFocused')).toBeFalsy();
   });
 });

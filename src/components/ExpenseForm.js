@@ -6,13 +6,13 @@ export default class ExpenseForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      description: props.expenseToEdit ? props.expenseToEdit.description : '',
-      note: props.expenseToEdit ? props.expenseToEdit.note : '',
-      amount: props.expenseToEdit
-        ? (props.expenseToEdit.amount / 100).toString()
+      description: props.expense ? props.expense.description : '',
+      note: props.expense ? props.expense.note : '',
+      amount: props.expense
+        ? (props.expense.amount / 100).toString()
         : '',
-      createdAt: props.expenseToEdit
-        ? moment(props.expenseToEdit.createdAt)
+      createdAt: props.expense
+        ? moment(props.expense.createdAt)
         : moment(),
       calendarFocused: false,
       error: ''
@@ -58,8 +58,8 @@ export default class ExpenseForm extends Component {
   };
 
   // componentWillMount = () => {
-  // 	if (this.props.expenseToEdit) {
-  // 		const { description, note, amount, createdAt } = this.props.expenseToEdit;
+  // 	if (this.props.expense) {
+  // 		const { description, note, amount, createdAt } = this.props.expense;
   // 		this.setState(() => ({ description, note, amount, createdAt: moment(createdAt) }));
   // 	}
   // };
@@ -95,7 +95,7 @@ export default class ExpenseForm extends Component {
             placeholder="Add an (optional) note for this expense"
             value={this.state.note}
           />
-          {this.props.expenseToEdit ? (
+          {this.props.expense ? (
             <button>Edit Expense</button>
           ) : (
             <button>Add Expense</button>
