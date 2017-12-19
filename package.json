@@ -12,7 +12,8 @@
     "babel-preset-env": "1.5.2",
     "babel-preset-react": "6.24.1",
     "css-loader": "0.28.4",
-    "live-server": "^1.2.0",
+    "express": "4.15.4",
+    "extract-text-webpack-plugin": "3.0.0",
     "moment": "2.18.1",
     "node-sass": "^4.6.0",
     "normalize.css": "7.0.0",
@@ -27,8 +28,7 @@
     "sass-loader": "^6.0.6",
     "style-loader": "0.18.2",
     "uuid": "3.1.0",
-    "webpack": "3.1.0",
-    "webpack-dev-server": "2.5.1"
+    "webpack": "3.1.0"
   },
   "scripts": {
     "dev-server": "webpack-dev-server",
@@ -37,7 +37,9 @@
     "build:prod": "webpack -p --env production",
     "lint": "eslint src",
     "test": "jest --config=jest.config.json",
-    "live:server": "live-server public"
+    "live:server": "live-server public",
+    "start": "node server/server.js",
+    "heroku-postbuild": "yarn run build:prod"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.3",
@@ -54,8 +56,10 @@
     "eslint-plugin-prettier": "2.3.1",
     "eslint-plugin-react": "^7.5.1",
     "jest": "20.0.4",
+    "live-server": "^1.2.0",
     "prettier": "1.7.0",
     "raf": "3.3.2",
-    "react-test-renderer": "16.0.0"
+    "react-test-renderer": "16.0.0",
+    "webpack-dev-server": "2.5.1"
   }
 }
