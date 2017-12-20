@@ -13,11 +13,11 @@ exports[`ExpenseListItem Component should render an expense list item 1`] = `
   </Link>
   <p>
     Amount: 
-    53500
+    $535.00
   </p>
   <p>
     Created On: 
-    -345600000
+    December 27th, 1969
   </p>
 </div>
 `;
