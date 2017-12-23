@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 // import uuid from 'uuid';
 import { db } from './../firebase/firebase';
 
@@ -47,3 +48,25 @@ export const editExpense = ({ id, updates }) => ({
   id,
   updates
 });
+
+// SET_EXPENSE
+export const setExpenses = (expenses) => ({
+  type: 'SET_EXPENSES',
+  expenses
+})
+
+export const startSetExpenses = () => {
+  return (dispatch) => {
+    return db.ref('expenses').once('value')
+      .then(data => {
+        const expenses = [];
+        data.forEach(item => {
+          expenses.push({
+            id: item.key,
+            ...item.val()
+          })
+        })
+        dispatch(setExpenses(expenses));
+      })
+  }
+};
